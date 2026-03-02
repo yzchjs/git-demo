@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全国硕士研究生招生考试部分考生初试成绩查询系统</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+            background-color: #fff;
+            min-height: 100vh;
+        }
+
+        .header {
+            background-color: #fff;
+            border-bottom: 2px solid #b81c22;
+            padding: 10px 0;
+        }
+
+        .header-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #b81c22;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .logo-text {
+            margin-left: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-link {
+            color: #666;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .header-link:hover {
+            color: #b81c22;
+        }
+
+        .main-container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px 15px;
+        }
+
+        .content-box {
+            background-color: #fff;
+            padding: 20px 0;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 22px;
+            color: #b81c22;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+
+        .province-section {
+            margin-bottom: 15px;
+        }
+
+        .province-list {
+            line-height: 2.2;
+            text-align: left;
+            padding: 0 10px;
+        }
+
+        .province-item {
+            display: inline-block;
+            color: #333;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 5px;
+            text-decoration: none;
+            padding: 2px 8px;
+        }
+
+        .province-item:hover {
+            color: #b81c22;
+            text-decoration: underline;
+        }
+
+        .province-item.active {
+            color: #b81c22;
+            font-weight: bold;
+        }
+
+        .tip-text {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-top: 20px;
+            padding: 15px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px 15px;
+            color: #999;
+            font-size: 12px;
+            border-top: 1px solid #eee;
+            margin-top: 30px;
+        }
+
+        .footer a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: #b81c22;
+        }
+
+        .query-form {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            background-color: #fafafa;
+        }
+
+        .query-form.show {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: inline-block;
+            width: 80px;
+            text-align: right;
+            margin-right: 10px;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 260px;
+            padding: 6px 8px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #b81c22;
+        }
+
+        .submit-btn {
+            background-color: #b81c22;
+            color: #fff;
+            border: none;
+            padding: 8px 30px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-left: 90px;
+        }
+
+        .submit-btn:hover {
+            background-color: #9a1820;
+        }
+
+        .selected-province {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .nav-bar {
+            background-color: #f5f5f5;
+            border-bottom: 1px solid #ddd;
+            padding: 8px 0;
+        }
+
+        .nav-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 15px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .nav-inner a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .nav-inner a:hover {
+            color: #b81c22;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">
+                <div class="logo-icon">学信</div>
+                <span class="logo-text">中国高等教育学生信息网</span>
+            </div>
+            <div class="header-right">
+                <a href="#" class="header-link">首页</a>
+                <a href="#" class="header-link">帮助</a>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav-bar">
+        <div class="nav-inner">
+            <a href="#">首页</a> &gt; <a href="#">成绩查询</a> &gt; 全国硕士研究生招生考试部分考生初试成绩查询系统
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="content-box">
+            <h1 class="page-title">全国硕士研究生招生考试部分考生初试成绩查询系统</h1>
+            
+            <div class="province-section">
+                <div class="province-list" id="provinceList">
+                    <a class="province-item" data-province="北京">北京</a>
+                    <a class="province-item" data-province="天津">天津</a>
+                    <a class="province-item" data-province="河北">河北</a>
+                    <a class="province-item" data-province="山西">山西</a>
+                    <a class="province-item" data-province="内蒙古">内蒙古</a>
+                    <a class="province-item" data-province="辽宁">辽宁</a>
+                    <a class="province-item" data-province="吉林">吉林</a>
+                    <a class="province-item" data-province="黑龙江">黑龙江</a>
+                    <a class="province-item" data-province="上海">上海</a>
+                    <a class="province-item" data-province="江苏">江苏</a>
+                    <a class="province-item" data-province="浙江">浙江</a>
+                    <a class="province-item" data-province="安徽">安徽</a>
+                    <a class="province-item" data-province="福建">福建</a>
+                    <a class="province-item" data-province="江西">江西</a>
+                    <a class="province-item" data-province="山东">山东</a>
+                    <a class="province-item" data-province="河南">河南</a>
+                    <a class="province-item" data-province="湖北">湖北</a>
+                    <a class="province-item" data-province="湖南">湖南</a>
+                    <a class="province-item" data-province="广东">广东</a>
+                    <a class="province-item" data-province="广西">广西</a>
+                    <a class="province-item" data-province="海南">海南</a>
+                    <a class="province-item" data-province="重庆">重庆</a>
+                    <a class="province-item" data-province="四川">四川</a>
+                    <a class="province-item" data-province="贵州">贵州</a>
+                    <a class="province-item" data-province="云南">云南</a>
+                    <a class="province-item" data-province="西藏">西藏</a>
+                    <a class="province-item" data-province="陕西">陕西</a>
+                    <a class="province-item" data-province="甘肃">甘肃</a>
+                    <a class="province-item" data-province="青海">青海</a>
+                    <a class="province-item" data-province="宁夏">宁夏</a>
+                    <a class="province-item" data-province="新疆">新疆</a>
+                </div>
+            </div>
+
+            <div class="tip-text">
+                请选择招生单位所在省市进行查询
+            </div>
+
+            <div class="query-form" id="queryForm">
+                <div class="selected-province">
+                    当前选择省份：<span id="selectedProvinceName"></span>
+                </div>
+                <div class="form-group">
+                    <label for="school">招生单位：</label>
+                    <select id="school">
+                        <option value="">请选择招生单位</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="name">姓　　名：</label>
+                    <input type="text" id="name" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="idNumber">证件号码：</label>
+                    <input type="text" id="idNumber" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="examNumber">准考证号：</label>
+                    <input type="text" id="examNumber" placeholder="">
+                </div>
+                <button class="submit-btn" type="button">查询</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>主办单位：教育部学生服务与素质发展中心</p>
+        <p style="margin-top: 10px;">
+            <a href="#">关于我们</a> | 
+            <a href="#">帮助中心</a> | 
+            <a href="#">联系我们</a>
+        </p>
+    </footer>
+
+    <script>
+        const provinceItems = document.querySelectorAll('.province-item');
+        const queryForm = document.getElementById('queryForm');
+        const selectedProvinceName = document.getElementById('selectedProvinceName');
+
+        provinceItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                provinceItems.forEach(p => p.classList.remove('active'));
+                this.classList.add('active');
+                
+                const province = this.getAttribute('data-province');
+                selectedProvinceName.textContent = province;
+                queryForm.classList.add('show');
+            });
+        });
+    </script>
+</body>
+</html>

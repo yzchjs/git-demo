@@ -1,0 +1,11 @@
+Host github.com-gatsby7547
+  HostName ssh.github.com
+  User git
+  Port 443
+  IdentityFile C:\Users\17691\.ssh\gatsby7547_github_key
+
+Host github.com-211365
+  HostName ssh.github.com
+  User git
+  Port 443
+  IdentityFile C:\Users\17691\.ssh\gatsby7547_github_key
